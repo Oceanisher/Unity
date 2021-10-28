@@ -9,8 +9,9 @@ namespace Chapter04.Scripts
     public class RoundCameraPos : CinemachineExtension
     {
         //一个世界单元显示的元素数量
+        [Header("PPU")]
         [SerializeField]
-        private float PixelPerUnit = 32;
+        private float _pixelPerUnit = 32;
         
         //Cinemachine Confiner处理后回调
         protected override void PostPipelineStageCallback(
@@ -31,7 +32,7 @@ namespace Chapter04.Scripts
         //四舍五入处理，返回整数
         private float Round(float x)
         {
-            return Mathf.Round(x * PixelPerUnit) / PixelPerUnit;
+            return Mathf.Round(x * _pixelPerUnit) / _pixelPerUnit;
         }
     } 
 }

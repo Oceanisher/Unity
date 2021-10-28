@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - ItemCanPickedUp
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - 
   - 
   - Blocking
-  - 
-  - 
+  - Consumables
+  - Enemies
   - 
   - 
   - 
@@ -47,6 +48,9 @@ TagManager:
     locked: 0
   - name: OutdoorObj
     uniqueID: 4107483439
+    locked: 0
+  - name: Items
+    uniqueID: 3524012131
     locked: 0
   - name: Characters
     uniqueID: 914551457
