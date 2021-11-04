@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 1211033860493084905}
   - component: {fileID: 1211033860493084904}
   - component: {fileID: 1211033860493084907}
+  - component: {fileID: 6267089781647278959}
+  - component: {fileID: 4560281014910603945}
+  - component: {fileID: 2400133065104412149}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -150,4 +153,51 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &6267089781647278959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211033860493084900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8fdc529502c4cdbb44e933161b0f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHitPoints: 10
+  startingHitPoints: 10
+  _damageStrength: 2
+--- !u!58 &4560281014910603945
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211033860493084900}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2
+--- !u!114 &2400133065104412149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211033860493084900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95bfcfa5beaf443a9a108a16b414a8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pursuitSpeed: 0.6
+  _wanderSpeed: 0.3
+  _directionChangeInterval: 3
+  _followPlayer: 1

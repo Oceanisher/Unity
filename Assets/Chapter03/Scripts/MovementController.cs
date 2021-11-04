@@ -24,12 +24,6 @@ namespace Chapter03.Scripts
             _animator = GetComponent<Animator>();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-
         void FixedUpdate()
         {
             ListenBoard();
@@ -54,7 +48,22 @@ namespace Chapter03.Scripts
         //改变动画
         private void ChangeAni()
         {
-            if (_movement.x > 0)
+            //如果按键趋近于0，那么停止移动
+            if (Mathf.Approximately(_movement.x, 0) 
+                && Mathf.Approximately(_movement.y, 0))
+            {
+                _animator.SetBool("IsWalking", false);
+            }
+            else
+            {
+                _animator.SetBool("IsWalking", true);
+                _animator.SetFloat("xDir", _movement.x);
+                _animator.SetFloat("yDir", _movement.y);
+            }
+
+            /*
+             //使用Blend Tree之后，不再需要此种方式
+             if (_movement.x > 0)
             {
                 _animator.SetInteger(_aniStateStr, (int)AnimationState.MoveEast);
             }
@@ -74,9 +83,12 @@ namespace Chapter03.Scripts
             {
                 _animator.SetInteger(_aniStateStr, (int)AnimationState.Idle);
             }
+             */
         }
     }
 
+    /*
+    //使用Blend Tree之后，不再需要枚举
     enum AnimationState
     {
         MoveEast = 1,
@@ -85,4 +97,5 @@ namespace Chapter03.Scripts
         MoveSouth = 4,
         Idle = 5,
     }
+     */
 }

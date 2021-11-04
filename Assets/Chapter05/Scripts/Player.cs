@@ -10,6 +10,11 @@ namespace Chapter05.Scripts
     //玩家脚本
     public class Player : Character
     {
+        //当前血量
+        [Header("生命值")]
+        [SerializeField]
+        private HitPointSO hitPointsSO;
+        
         [Header("生命条预制")]
         [SerializeField]
         private HealthBar _healthBarPrefab;
@@ -26,17 +31,7 @@ namespace Chapter05.Scripts
         // Start is called before the first frame update
         void Start()
         {
-            hitPointsSO.value = startingHitPoints;
-            _healthBar = Instantiate(_healthBarPrefab);
-            _healthBar.player = this;
-
-            _inventory = Instantiate(_inventoryPrefab);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            ResetCharacter();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -82,6 +77,48 @@ namespace Chapter05.Scripts
                 ? maxHitPoints
                 : (hitPointsSO.value + amount);
             return true;
+        }
+
+        public override void KillCharacter()
+        {
+            base.KillCharacter();
+            
+            Destroy(_healthBar.gameObject);
+            Destroy(_inventory.gameObject);
+        }
+
+        public override void ResetCharacter()
+        {
+            hitPointsSO.value = startingHitPoints;
+            _healthBar = Instantiate(_healthBarPrefab);
+            _healthBar.player = this;
+
+            _inventory = Instantiate(_inventoryPrefab);
+        }
+
+        public override IEnumerator DamageCharacter(int damage, int interval)
+        {
+            while (true)
+            {
+                //受伤闪烁
+                StartCoroutine(FlickerCharater());
+                hitPointsSO.value -= damage;
+                //如果生命值已经为0，杀死角色
+                if (hitPointsSO.value <= float.Epsilon)
+                {
+                    KillCharacter();
+                    break;
+                }
+
+                if (interval > float.Epsilon)
+                {
+                    yield return new WaitForSeconds(interval);
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
     }
 }
